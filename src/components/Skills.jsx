@@ -7,6 +7,9 @@ import {
     FaJs,
     FaReact,
     FaGitAlt,
+    FaGithub,
+    FaGoogle,
+    FaRobot,
 } from "react-icons/fa";
 
 import {
@@ -15,10 +18,6 @@ import {
     SiMysql,
     SiPostman,
     SiIntellijidea,
-    SiGithubcopilot,
-    SiGooglegemini,
-    SiClaude,
-    SiOpenai,
     SiPostgresql,
 } from "react-icons/si";
 
@@ -57,11 +56,11 @@ function getSkillIcon(skill) {
         "VS Code": null,
         "IntelliJ IDEA": <SiIntellijidea />,
 
-        // AI
-        ChatGPT: <SiOpenai />,
-        "Google Gemini": <SiGooglegemini />,
-        Claude: <SiClaude />,
-        "GitHub Copilot": <SiGithubcopilot />,
+        // AI & Developer Tools
+        ChatGPT: <FaRobot />,
+        "Google Gemini": <FaGoogle />,
+        Claude: <FaRobot />,
+        "GitHub Copilot": <FaGithub />,
     };
 
     return icons[skill] || "◆";
