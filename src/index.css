@@ -745,3 +745,301 @@ section {
     gap: 18px;
   }
 }
+/* =========================
+   HOME PROJECT
+========================= */
+
+.home-project {
+  margin-top: 60px;
+}
+
+/* =========================
+   EXPLORE PROJECTS
+========================= */
+
+.explore-projects {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 55px;
+}
+
+.explore-projects-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #cbd5e1;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  padding-bottom: 6px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    gap 0.25s ease;
+}
+
+.explore-projects-link:hover {
+  color: var(--accent);
+
+  border-color: var(--accent);
+
+  gap: 18px;
+}
+
+.explore-projects-link span {
+  font-size: 1.2rem;
+}
+
+/* =========================
+   ALL PROJECTS PAGE
+========================= */
+
+.all-projects-section {
+  min-height: 100vh;
+
+  padding: 150px 0 100px;
+
+  background-color: var(--background);
+}
+
+.projects-page-header {
+  max-width: 700px;
+
+  margin-bottom: 70px;
+}
+
+.projects-page-header h1 {
+  font-size: clamp(2.8rem, 6vw, 5rem);
+
+  font-weight: 700;
+
+  line-height: 1.1;
+
+  margin-bottom: 20px;
+}
+
+.projects-page-header p:last-child {
+  color: var(--text-secondary);
+
+  font-size: 1rem;
+
+  line-height: 1.8;
+
+  max-width: 600px;
+}
+
+.projects-page-list {
+  margin-top: 20px;
+}
+
+/* =========================
+   PROJECT PAGE MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .all-projects-section {
+    padding: 120px 0 70px;
+  }
+
+  .projects-page-header {
+    margin-bottom: 45px;
+  }
+}
+/* =========================
+   EXPERIENCE SECTION
+========================= */
+
+.experience-section {
+  padding: 120px 0;
+  background-color: #0f141b;
+}
+
+.experience-list {
+  max-width: 850px;
+  margin: 70px auto 0;
+}
+
+/* =========================
+   EXPERIENCE ITEM
+========================= */
+
+.experience-item {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 35px 1fr;
+
+  gap: 25px;
+
+  padding-bottom: 55px;
+}
+
+.experience-item:last-child {
+  padding-bottom: 0;
+}
+
+/* =========================
+   TIMELINE
+========================= */
+
+.experience-marker {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+}
+
+.experience-marker::before {
+  content: "";
+
+  position: absolute;
+
+  top: 8px;
+  bottom: -55px;
+
+  width: 1px;
+
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.experience-item:last-child .experience-marker::before {
+  display: none;
+}
+
+.experience-marker span {
+  position: relative;
+
+  width: 11px;
+  height: 11px;
+
+  margin-top: 5px;
+
+  background-color: var(--accent);
+
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.1);
+}
+
+/* =========================
+   EXPERIENCE CONTENT
+========================= */
+
+.experience-content {
+  padding-bottom: 5px;
+}
+
+.experience-period {
+  color: var(--accent);
+
+  font-size: 0.8rem;
+
+  font-weight: 600;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 8px;
+}
+
+.experience-content h3 {
+  color: var(--text-primary);
+
+  font-size: 1.4rem;
+
+  font-weight: 600;
+
+  margin-bottom: 5px;
+}
+
+.experience-content h4 {
+  color: var(--text-secondary);
+
+  font-size: 1rem;
+
+  font-weight: 500;
+
+  margin-bottom: 4px;
+}
+
+.experience-location {
+  color: #64748b;
+
+  font-size: 0.8rem;
+
+  margin-bottom: 18px;
+}
+
+.experience-description {
+  color: #cbd5e1;
+
+  font-size: 0.92rem;
+
+  line-height: 1.7;
+
+  max-width: 700px;
+
+  margin-bottom: 18px;
+}
+
+/* =========================
+   EXPERIENCE SKILLS
+========================= */
+
+.experience-skills {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.experience-skill {
+  padding: 5px 9px;
+
+  color: #94a3b8;
+
+  background-color: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 5px;
+
+  font-size: 0.72rem;
+}
+
+/* =========================
+   EXPERIENCE MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .experience-section {
+    padding: 90px 0;
+  }
+
+  .experience-list {
+    margin-top: 45px;
+  }
+
+  .experience-item {
+    grid-template-columns: 25px 1fr;
+
+    gap: 18px;
+
+    padding-bottom: 45px;
+  }
+
+  .experience-marker::before {
+    bottom: -45px;
+  }
+
+  .experience-content h3 {
+    font-size: 1.2rem;
+  }
+}
