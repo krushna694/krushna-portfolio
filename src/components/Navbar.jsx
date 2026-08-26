@@ -58,11 +58,6 @@ function Navbar() {
         setMobileOpen(false);
     };
 
-    const handleResume = () => {
-        // We'll connect your actual resume PDF here later.
-        console.log("Resume clicked");
-    };
-
     return (
         <motion.header
             className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}

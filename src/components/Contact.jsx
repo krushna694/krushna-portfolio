@@ -98,8 +98,6 @@ function Contact() {
                 setFormStatus("error");
             }
         } catch (error) {
-            console.error("Error sending message:", error);
-
             setFormStatus("error");
         }
     };
