@@ -49,13 +49,15 @@ function Navbar() {
         const section = document.getElementById(id);
 
         if (section) {
-            section.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-        }
+            setMobileOpen(false);
 
-        setMobileOpen(false);
+            setTimeout(() => {
+                section.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+            }, 100);
+        }
     };
 
     return (
