@@ -1,93 +1,240 @@
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaBars, FaTimes, FaArrowUp } from "react-icons/fa";
 
 function Navbar() {
+    const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState("home");
+    const [mobileOpen, setMobileOpen] = useState(false);
+
+    const navItems = [
+        { id: "home", label: "Home" },
+        { id: "about", label: "About" },
+        { id: "skills", label: "Skills" },
+        { id: "projects", label: "Projects" },
+        { id: "experience", label: "Experience" },
+        { id: "education", label: "Education" },
+        { id: "contact", label: "Contact" },
+    ];
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 30);
+
+            const scrollPosition = window.scrollY + 180;
+
+            let currentSection = "home";
+
+            navItems.forEach((item) => {
+                const section = document.getElementById(item.id);
+
+                if (section && section.offsetTop <= scrollPosition) {
+                    currentSection = item.id;
+                }
+            });
+
+            setActiveSection(currentSection);
+        };
+
+        handleScroll();
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    const handleNavigation = (id) => {
+        const section = document.getElementById(id);
+
+        if (section) {
+            section.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+
+        setMobileOpen(false);
+    };
+
+    const handleResume = () => {
+        // We'll connect your actual resume PDF here later.
+        console.log("Resume clicked");
+    };
+
     return (
-        <nav className="navbar navbar-expand-lg fixed-top custom-navbar">
-            <div className="container">
+        <motion.header
+            className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}
+            initial={{
+                y: -80,
+                opacity: 0,
+            }}
+            animate={{
+                y: 0,
+                opacity: 1,
+            }}
+            transition={{
+                duration: 0.6,
+                ease: "easeOut",
+            }}
+        >
 
-                {/* Logo */}
-                <a className="navbar-brand logo" href="#">
-                    Krushna.
-                </a>
+            <div className="navbar-container">
 
-                {/* Mobile Menu Button */}
+                {/* =========================
+                    LOGO
+                ========================= */}
+
                 <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarContent"
-                    aria-controls="navbarContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
+                    className="navbar-logo"
+                    onClick={() => handleNavigation("home")}
+                    aria-label="Go to home"
                 >
-                    <span className="navbar-toggler-icon"></span>
+                    <span>K</span>
+                    <span>W</span>
                 </button>
 
-                {/* Navigation */}
-                <div className="collapse navbar-collapse" id="navbarContent">
 
-                    <ul className="navbar-nav ms-auto align-items-lg-center">
+                {/* =========================
+                    DESKTOP NAVIGATION
+                ========================= */}
 
-                        <li className="nav-item">
-                            <a className="nav-link" href="#about">
-                                About
-                            </a>
-                        </li>
+                <nav className="navbar-links">
 
-                        <li className="nav-item">
-                            <a className="nav-link" href="#skills">
-                                Skills
-                            </a>
-                        </li>
+                    {navItems.map((item) => (
 
-                        <li className="nav-item">
-                            <a className="nav-link" href="/#projects">
-                                Projects
-                            </a>
-                        </li>
+                        <button
+                            key={item.id}
+                            className={`navbar-link ${activeSection === item.id
+                                ? "active"
+                                : ""
+                                }`}
+                            onClick={() => handleNavigation(item.id)}
+                        >
+                            {item.label}
 
-                        <li className="nav-item">
-                            <a className="nav-link" href="#experience">
-                                Experience
-                            </a>
-                        </li>
+                            {activeSection === item.id && (
+                                <motion.span
+                                    className="navbar-active-line"
+                                    layoutId="navbar-active-line"
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 400,
+                                        damping: 30,
+                                    }}
+                                />
+                            )}
+                        </button>
 
-                        <li className="nav-item">
-                            <a className="nav-link" href="#contact">
-                                Contact
-                            </a>
-                        </li>
+                    ))}
 
-                        {/* GitHub */}
-                        <li className="nav-item ms-lg-3">
-                            <a
-                                href="https://github.com/"
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label="GitHub"
-                            >
-                                <FaGithub className="social-icon" />
-                            </a>
-                        </li>
+                </nav>
 
-                        {/* LinkedIn */}
-                        <li className="nav-item ms-lg-3">
-                            <a
-                                href="https://linkedin.com/"
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label="LinkedIn"
-                            >
-                                <FaLinkedin className="social-icon" />
-                            </a>
-                        </li>
+                {/* =========================
+                    MOBILE MENU BUTTON
+                ========================= */}
 
-                    </ul>
-
-                </div>
+                <button
+                    className="navbar-menu-button"
+                    onClick={() => setMobileOpen(!mobileOpen)}
+                    aria-label={
+                        mobileOpen
+                            ? "Close navigation menu"
+                            : "Open navigation menu"
+                    }
+                >
+                    {mobileOpen ? (
+                        <FaTimes />
+                    ) : (
+                        <FaBars />
+                    )}
+                </button>
 
             </div>
-        </nav>
+
+
+            {/* =========================
+                MOBILE MENU
+            ========================= */}
+
+            <AnimatePresence>
+
+                {mobileOpen && (
+
+                    <motion.div
+                        className="mobile-menu"
+
+                        initial={{
+                            opacity: 0,
+                            height: 0,
+                        }}
+
+                        animate={{
+                            opacity: 1,
+                            height: "auto",
+                        }}
+
+                        exit={{
+                            opacity: 0,
+                            height: 0,
+                        }}
+
+                        transition={{
+                            duration: 0.3,
+                        }}
+                    >
+
+                        <div className="mobile-menu-inner">
+
+                            {navItems.map((item, index) => (
+
+                                <motion.button
+                                    key={item.id}
+
+                                    className={`mobile-menu-link ${activeSection === item.id
+                                        ? "active"
+                                        : ""
+                                        }`}
+
+                                    onClick={() =>
+                                        handleNavigation(item.id)
+                                    }
+
+                                    initial={{
+                                        opacity: 0,
+                                        x: -15,
+                                    }}
+
+                                    animate={{
+                                        opacity: 1,
+                                        x: 0,
+                                    }}
+
+                                    transition={{
+                                        delay: index * 0.04,
+                                    }}
+                                >
+                                    <span>
+                                        {item.label}
+                                    </span>
+
+                                    {activeSection === item.id && (
+                                        <span className="mobile-active-dot"></span>
+                                    )}
+                                </motion.button>
+
+                            ))}
+
+                        </div>
+
+                    </motion.div>
+
+                )}
+
+            </AnimatePresence>
+
+        </motion.header>
     );
 }
 

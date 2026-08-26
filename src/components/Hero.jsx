@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import {
     FaGithub,
     FaLinkedin,
-    FaEnvelope
+    FaEnvelope,
+    FaGoogle,
 } from "react-icons/fa";
 
 function Hero() {
@@ -98,7 +99,7 @@ function Hero() {
                 >
 
                     <a
-                        href="https://github.com/"
+                        href="https://github.com/krushna694"
                         target="_blank"
                         rel="noreferrer"
                         aria-label="GitHub"
@@ -107,19 +108,28 @@ function Hero() {
                     </a>
 
                     <a
-                        href="https://linkedin.com/"
+                        href="https://www.linkedin.com/in/krushna-wakchaure-06sept/"
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         aria-label="LinkedIn"
                     >
                         <FaLinkedin />
                     </a>
 
                     <a
-                        href="mailto:your-email@gmail.com"
-                        aria-label="Email"
+                        href="mailto:krushnawakchaure3@gmail.com"
+                        aria-label="Open default email application"
                     >
                         <FaEnvelope />
+                    </a>
+
+                    <a
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=krushnawakchaure3@gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Gmail compose"
+                    >
+                        <FaGoogle />
                     </a>
 
                 </motion.div>

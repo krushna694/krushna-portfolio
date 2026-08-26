@@ -1,29 +1,38 @@
-import { motion } from "framer-motion";
+import {
+    motion,
+} from "framer-motion";
+import {
+    FaGraduationCap,
+    FaCode,
+    FaDatabase,
+    FaBriefcase,
+} from "react-icons/fa";
 
+import { FaJava } from "react-icons/fa6";
 function About() {
     const facts = [
         {
-            icon: "🎓",
+            icon: <FaGraduationCap />,
             label: "Education",
             value: "Computer Engineering",
         },
         {
-            icon: "💻",
+            icon: <FaJava />,
             label: "Primary Focus",
             value: "Java & Spring Boot",
         },
         {
-            icon: "🌐",
+            icon: <FaCode />,
             label: "Development",
             value: "Full-Stack Web Development",
         },
         {
-            icon: "🗄️",
+            icon: <FaDatabase />,
             label: "Database",
             value: "MySQL",
         },
         {
-            icon: "🚀",
+            icon: <FaBriefcase />,
             label: "Career Goal",
             value: "Software Developer",
         },

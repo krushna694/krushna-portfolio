@@ -27,22 +27,22 @@ function Contact() {
         {
             icon: <FaEnvelope />,
             label: "Email",
-            value: "your-email@example.com",
-            href: "mailto:your-email@example.com",
+            value: "krushnawakchaure3@gmail.com",
+            href: "mailto:krushnawakchaure3@gmail.com",
         },
 
         {
             icon: <FaLinkedinIn />,
             label: "LinkedIn",
             value: "Connect with me",
-            href: "#",
+            href: "https://www.linkedin.com/in/krushna-wakchaure-06sept/",
         },
 
         {
             icon: <FaGithub />,
             label: "GitHub",
             value: "View my projects",
-            href: "#",
+            href: "https://github.com/krushna694",
         },
     ];
 

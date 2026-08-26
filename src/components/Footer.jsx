@@ -4,6 +4,7 @@ import {
     FaLinkedinIn,
     FaEnvelope,
     FaArrowRight,
+    FaGoogle,
 } from "react-icons/fa";
 
 function Footer() {
@@ -157,7 +158,7 @@ function Footer() {
                         </h3>
 
                         <p>
-                           Java and Full Stack Developer
+                            Java and Full Stack Developer
                         </p>
 
                     </div>
@@ -189,7 +190,7 @@ function Footer() {
                     >
 
                         <a
-                            href="#"
+                            href="https://github.com/krushna694"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="GitHub"
@@ -199,7 +200,7 @@ function Footer() {
                         </a>
 
                         <a
-                            href="#"
+                            href="https://www.linkedin.com/in/krushna-wakchaure-06sept/"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="LinkedIn"
@@ -209,11 +210,19 @@ function Footer() {
                         </a>
 
                         <a
-                            href="mailto:your-email@example.com"
+                            href="mailto:krushnawakchaure3@gmail.com"
                             aria-label="Email"
                         >
                             <FaEnvelope />
                             <span>Email</span>
+                        </a>
+
+                        <a
+                            href="https://mail.google.com/mail/?view=cm&fs=1&to=krushnawakchaure3@gmail.com"
+                            aria-label="Gmail"
+                        >
+                            <FaGoogle />
+                            <span>Gmail</span>
                         </a>
 
                     </motion.div>
