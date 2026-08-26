@@ -5,7 +5,7 @@ export const projects = [
     subtitle: "Smart Kumbh Management Platform",
 
     description:
-      "A web-based platform designed to help visitors discover events, attractions, emergency services, and important information during Kumbh Mela.",
+      "A web platform designed to help visitors discover events, attractions, emergency services, and important information during Kumbh Mela.",
 
     technologies: [
       "Java",
@@ -20,8 +20,6 @@ export const projects = [
 
     github: "#",
     live: "#",
-
-    featured: true,
   },
 
   {
@@ -30,7 +28,7 @@ export const projects = [
     subtitle: "Full-Stack E-Commerce Platform",
 
     description:
-      "A full-stack e-commerce application with product browsing, search, cart management, authentication, and an online shopping workflow.",
+      "A full-stack e-commerce application with product browsing, search, cart management, authentication, and a complete shopping workflow.",
 
     technologies: ["React", "Spring Boot", "MySQL", "REST API", "JavaScript"],
 
@@ -38,8 +36,6 @@ export const projects = [
 
     github: "#",
     live: "#",
-
-    featured: false,
   },
 
   {
@@ -56,7 +52,5 @@ export const projects = [
 
     github: "#",
     live: "#",
-
-    featured: false,
   },
 ];

@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
 import ProjectCard from "./ProjectCard";
 import { projects } from "../data/projects";
 
 function Projects() {
+
+    const featuredProject = projects[0];
+
     return (
         <section
             className="projects-section"
@@ -28,6 +33,7 @@ function Projects() {
 
                     viewport={{
                         once: true,
+                        amount: 0.2,
                     }}
 
                     transition={{
@@ -40,58 +46,63 @@ function Projects() {
                     </p>
 
                     <h2 className="section-title">
-                        Things I've built
+                        Selected work
                     </h2>
 
                     <p className="section-description">
-                        A selection of projects where I've applied my
-                        programming and web development skills to build
-                        practical applications.
+                        A look at one of my projects. Explore the complete
+                        collection to see more of my work.
                     </p>
 
                 </motion.div>
 
 
-                {/* Project Cards */}
+                {/* Featured Project */}
 
-                <div className="row g-4">
+                <div className="home-project">
 
-                    {projects.map((project, index) => (
-
-                        <motion.div
-                            className="col-lg-6"
-                            key={project.id}
-
-                            initial={{
-                                opacity: 0,
-                                y: 50,
-                            }}
-
-                            whileInView={{
-                                opacity: 1,
-                                y: 0,
-                            }}
-
-                            viewport={{
-                                once: true,
-                                amount: 0.15,
-                            }}
-
-                            transition={{
-                                duration: 0.6,
-                                delay: index * 0.15,
-                            }}
-                        >
-
-                            <ProjectCard
-                                project={project}
-                            />
-
-                        </motion.div>
-
-                    ))}
+                    <ProjectCard
+                        project={featuredProject}
+                        index={0}
+                    />
 
                 </div>
+
+
+                {/* Explore More */}
+
+                <motion.div
+                    className="explore-projects"
+
+                    initial={{
+                        opacity: 0,
+                        y: 20,
+                    }}
+
+                    whileInView={{
+                        opacity: 1,
+                        y: 0,
+                    }}
+
+                    viewport={{
+                        once: true,
+                    }}
+
+                    transition={{
+                        duration: 0.6,
+                        delay: 0.2,
+                    }}
+                >
+
+                    <Link
+                        to="/projects"
+                        className="explore-projects-link"
+                    >
+                        Explore More Projects
+                        <span>→</span>
+                    </Link>
+
+                </motion.div>
 
             </div>
 

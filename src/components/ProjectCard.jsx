@@ -1,60 +1,68 @@
 import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import {
+    FaGithub,
+    FaExternalLinkAlt,
+} from "react-icons/fa";
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, index }) {
+
+    const isReversed = index % 2 !== 0;
+
     return (
-        <motion.div
-            className="project-card"
-            whileHover={{
-                y: -8,
+        <motion.article
+            className={`project-row ${isReversed ? "project-row-reverse" : ""
+                }`}
+
+            initial={{
+                opacity: 0,
+                y: 50,
             }}
+
+            whileInView={{
+                opacity: 1,
+                y: 0,
+            }}
+
+            viewport={{
+                once: true,
+                amount: 0.2,
+            }}
+
             transition={{
-                duration: 0.3,
+                duration: 0.7,
             }}
         >
 
             {/* Project Image */}
 
-            <div className="project-image-wrapper">
+            <div className="project-image-container">
 
-                <img
-                    src={project.image}
-                    alt={`${project.title} project screenshot`}
-                    className="project-image"
-                />
+                <motion.div
+                    className="project-image-wrapper"
 
-                <div className="project-overlay">
+                    whileHover={{
+                        scale: 1.02,
+                    }}
 
-                    {project.github !== "#" && (
-                        <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noreferrer"
-                            aria-label={`${project.title} GitHub`}
-                        >
-                            <FaGithub />
-                        </a>
-                    )}
+                    transition={{
+                        duration: 0.3,
+                    }}
+                >
 
-                    {project.live !== "#" && (
-                        <a
-                            href={project.live}
-                            target="_blank"
-                            rel="noreferrer"
-                            aria-label={`${project.title} live demo`}
-                        >
-                            <FaExternalLinkAlt />
-                        </a>
-                    )}
+                    <img
+                        src={project.image}
+                        alt={`${project.title} project screenshot`}
+                        className="project-image"
+                    />
 
-                </div>
+                </motion.div>
 
             </div>
 
 
-            {/* Project Content */}
+            {/* Project Information */}
 
-            <div className="project-content">
+            <div className="project-info">
 
                 <p className="project-number">
                     {String(project.id).padStart(2, "0")}
@@ -77,16 +85,18 @@ function ProjectCard({ project }) {
 
                 <div className="project-technologies">
 
-                    {project.technologies.map((technology) => (
+                    {project.technologies.map(
+                        (technology) => (
 
-                        <span
-                            className="project-tech"
-                            key={technology}
-                        >
-                            {technology}
-                        </span>
+                            <span
+                                className="project-tech"
+                                key={technology}
+                            >
+                                {technology}
+                            </span>
 
-                    ))}
+                        )
+                    )}
 
                 </div>
 
@@ -96,6 +106,7 @@ function ProjectCard({ project }) {
                 <div className="project-links">
 
                     {project.github !== "#" && (
+
                         <a
                             href={project.github}
                             target="_blank"
@@ -104,9 +115,11 @@ function ProjectCard({ project }) {
                             <FaGithub />
                             GitHub
                         </a>
+
                     )}
 
                     {project.live !== "#" && (
+
                         <a
                             href={project.live}
                             target="_blank"
@@ -115,13 +128,14 @@ function ProjectCard({ project }) {
                             <FaExternalLinkAlt />
                             Live Demo
                         </a>
+
                     )}
 
                 </div>
 
             </div>
 
-        </motion.div>
+        </motion.article>
     );
 }
 
