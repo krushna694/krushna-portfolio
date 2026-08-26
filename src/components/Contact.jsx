@@ -46,7 +46,6 @@ function Contact() {
         },
     ];
 
-
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -56,9 +55,10 @@ function Contact() {
         });
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setFormStatus("sending");
 
         try {
             const response = await fetch(
@@ -86,7 +86,7 @@ function Contact() {
             const result = await response.json();
 
             if (result.success) {
-                console.log("Message sent successfully!");
+                setFormStatus("success");
 
                 setFormData({
                     name: "",
@@ -95,11 +95,27 @@ function Contact() {
                     message: "",
                 });
             } else {
-                console.error("Failed to send message:", result);
+                setFormStatus("error");
             }
         } catch (error) {
             console.error("Error sending message:", error);
+
+            setFormStatus("error");
         }
+    };
+
+    const handleStartConversation = () => {
+        setFormStatus("idle");
+        setShowForm(true);
+    };
+
+    const handleBack = () => {
+        setShowForm(false);
+        setFormStatus("idle");
+    };
+
+    const handleSendAnother = () => {
+        setFormStatus("idle");
     };
 
     return (
@@ -110,8 +126,8 @@ function Contact() {
             <div className="container">
 
                 {/* =========================
-            SECTION HEADING
-        ========================= */}
+                    SECTION HEADING
+                ========================= */}
 
                 <motion.div
                     className="contact-heading"
@@ -151,8 +167,8 @@ function Contact() {
 
 
                 {/* =========================
-            CONTACT CARD
-        ========================= */}
+                    CONTACT CARD
+                ========================= */}
 
                 <motion.div
                     className="contact-card"
@@ -178,10 +194,9 @@ function Contact() {
                     }}
                 >
 
-
                     {/* =========================
-              LEFT SIDE
-          ========================= */}
+                        LEFT SIDE
+                    ========================= */}
 
                     <div className="contact-intro">
 
@@ -215,18 +230,18 @@ function Contact() {
 
 
                     {/* =========================
-              RIGHT SIDE
-          ========================= */}
+                        RIGHT SIDE
+                    ========================= */}
 
                     <div className="contact-details">
 
                         <AnimatePresence mode="wait">
 
-                            {!showForm ? (
+                            {/* =================================
+                                INITIAL CONTACT LINKS
+                            ================================= */}
 
-                                /* =========================
-                                   CONTACT LINKS
-                                ========================= */
+                            {!showForm && formStatus !== "success" && (
 
                                 <motion.div
                                     key="contact-links"
@@ -308,7 +323,7 @@ function Contact() {
 
                                         className="contact-cta"
 
-                                        onClick={() => setShowForm(true)}
+                                        onClick={handleStartConversation}
 
                                         whileHover={{
                                             y: -3,
@@ -321,15 +336,19 @@ function Contact() {
                                         Start a conversation
 
                                         <FaArrowRight />
+
                                     </motion.button>
 
                                 </motion.div>
 
-                            ) : (
+                            )}
 
-                                /* =========================
-                                   CONTACT FORM
-                                ========================= */
+
+                            {/* =================================
+                                CONTACT FORM
+                            ================================= */}
+
+                            {showForm && formStatus !== "success" && (
 
                                 <motion.form
                                     key="contact-form"
@@ -358,9 +377,12 @@ function Contact() {
                                     }}
                                 >
 
+                                    {/* Form Header */}
+
                                     <div className="contact-form-header">
 
                                         <div>
+
                                             <h3>
                                                 Send me a message
                                             </h3>
@@ -368,12 +390,17 @@ function Contact() {
                                             <p>
                                                 I'll get back to you as soon as possible.
                                             </p>
+
                                         </div>
 
                                         <button
                                             type="button"
+
                                             className="contact-back-button"
-                                            onClick={() => setShowForm(false)}
+
+                                            onClick={handleBack}
+
+                                            disabled={formStatus === "sending"}
                                         >
                                             <FaArrowLeft />
                                             Back
@@ -399,6 +426,7 @@ function Contact() {
                                                 placeholder="Enter your name"
                                                 value={formData.name}
                                                 onChange={handleChange}
+                                                disabled={formStatus === "sending"}
                                                 required
                                             />
 
@@ -418,6 +446,7 @@ function Contact() {
                                                 placeholder="Enter your email"
                                                 value={formData.email}
                                                 onChange={handleChange}
+                                                disabled={formStatus === "sending"}
                                                 required
                                             />
 
@@ -441,6 +470,7 @@ function Contact() {
                                             placeholder="What would you like to discuss?"
                                             value={formData.subject}
                                             onChange={handleChange}
+                                            disabled={formStatus === "sending"}
                                             required
                                         />
 
@@ -462,24 +492,148 @@ function Contact() {
                                             placeholder="Write your message here..."
                                             value={formData.message}
                                             onChange={handleChange}
+                                            disabled={formStatus === "sending"}
                                             required
                                         />
 
                                     </div>
 
 
-                                    {/* Submit */}
+                                    {/* Error Message */}
+
+                                    {formStatus === "error" && (
+
+                                        <motion.p
+                                            className="contact-error"
+
+                                            initial={{
+                                                opacity: 0,
+                                                y: -5,
+                                            }}
+
+                                            animate={{
+                                                opacity: 1,
+                                                y: 0,
+                                            }}
+                                        >
+                                            Something went wrong.
+                                            Please try again.
+                                        </motion.p>
+
+                                    )}
+
+
+                                    {/* Submit Button */}
 
                                     <button
                                         type="submit"
-                                        className="contact-submit-button"
-                                    >
-                                        Send Message
 
-                                        <FaPaperPlane />
+                                        className="contact-submit-button"
+
+                                        disabled={formStatus === "sending"}
+                                    >
+
+                                        {formStatus === "sending" ? (
+
+                                            <>
+                                                <span className="contact-spinner"></span>
+                                                Sending...
+                                            </>
+
+                                        ) : (
+
+                                            <>
+                                                Send Message
+                                                <FaPaperPlane />
+                                            </>
+
+                                        )}
+
                                     </button>
 
                                 </motion.form>
+
+                            )}
+
+
+                            {/* =================================
+                                SUCCESS STATE
+                            ================================= */}
+
+                            {formStatus === "success" && (
+
+                                <motion.div
+                                    key="success"
+
+                                    className="contact-success"
+
+                                    initial={{
+                                        opacity: 0,
+                                        scale: 0.95,
+                                    }}
+
+                                    animate={{
+                                        opacity: 1,
+                                        scale: 1,
+                                    }}
+
+                                    transition={{
+                                        duration: 0.4,
+                                    }}
+                                >
+
+                                    <motion.div
+                                        className="contact-success-icon"
+
+                                        initial={{
+                                            scale: 0,
+                                        }}
+
+                                        animate={{
+                                            scale: 1,
+                                        }}
+
+                                        transition={{
+                                            duration: 0.4,
+                                            delay: 0.1,
+                                            type: "spring",
+                                            stiffness: 180,
+                                        }}
+                                    >
+                                        ✓
+                                    </motion.div>
+
+                                    <h3>
+                                        Message sent successfully!
+                                    </h3>
+
+                                    <p>
+                                        Thanks for reaching out.
+                                        I'll get back to you as soon as possible.
+                                    </p>
+
+                                    <motion.button
+                                        type="button"
+
+                                        className="contact-send-another"
+
+                                        onClick={handleSendAnother}
+
+                                        whileHover={{
+                                            y: -2,
+                                        }}
+
+                                        whileTap={{
+                                            scale: 0.98,
+                                        }}
+                                    >
+                                        Send another message
+
+                                        <FaArrowRight />
+
+                                    </motion.button>
+
+                                </motion.div>
 
                             )}
 
