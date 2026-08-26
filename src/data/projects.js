@@ -2,10 +2,10 @@ export const projects = [
   {
     id: 1,
     title: "KumbhConnect",
-    subtitle: "Smart Kumbh Management System",
+    subtitle: "Smart Kumbh Management Platform",
 
     description:
-      "A web-based platform designed to provide useful information and services for visitors during Kumbh Mela.",
+      "A web-based platform designed to help visitors discover events, attractions, emergency services, and important information during Kumbh Mela.",
 
     technologies: [
       "Java",
@@ -30,16 +30,16 @@ export const projects = [
     subtitle: "Full-Stack E-Commerce Platform",
 
     description:
-      "A full-stack e-commerce application for browsing products, managing carts, and handling an online shopping workflow.",
+      "A full-stack e-commerce application with product browsing, search, cart management, authentication, and an online shopping workflow.",
 
-    technologies: ["React", "Java", "Spring Boot", "MySQL", "REST API"],
+    technologies: ["React", "Spring Boot", "MySQL", "REST API", "JavaScript"],
 
     image: "/images/projects/sneakx/thumbnail.png",
 
     github: "#",
     live: "#",
 
-    featured: true,
+    featured: false,
   },
 
   {
@@ -48,7 +48,7 @@ export const projects = [
     subtitle: "Car Dealership Management Platform",
 
     description:
-      "A web application for managing car listings, customer interactions, and dealership-related operations.",
+      "A web application for managing car listings, customer interactions, and dealership operations with a responsive interface.",
 
     technologies: ["PHP", "MySQL", "HTML", "CSS", "JavaScript", "Bootstrap"],
 
