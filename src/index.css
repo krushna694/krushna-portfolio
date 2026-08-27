@@ -646,12 +646,18 @@ section {
 
   font-size: 1.6rem;
 
-  transition: all 0.3s ease;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease,
+    filter 0.25s ease;
 }
 
 .hero-socials a:hover {
   color: var(--accent);
-  transform: translateY(-4px);
+
+  transform: translateY(-4px) scale(1.08);
+
+  filter: drop-shadow(0 0 7px rgba(56, 189, 248, 0.45));
 }
 
 /* =========================
@@ -2938,13 +2944,15 @@ section {
 }
 
 .footer-socials a:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.02);
 
   color: var(--accent);
 
-  border-color: rgba(59, 130, 246, 0.25);
+  border-color: rgba(56, 189, 248, 0.3);
 
-  background-color: rgba(59, 130, 246, 0.04);
+  background-color: rgba(56, 189, 248, 0.05);
+
+  box-shadow: 0 6px 18px rgba(56, 189, 248, 0.08);
 }
 
 .footer-socials svg {
