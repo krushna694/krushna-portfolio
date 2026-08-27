@@ -8,11 +8,13 @@ import Navbar from "./components/Navbar";
 
 import Home from "./pages/Home";
 import ProjectsPage from "./pages/ProjectsPage";
+import CustomCursor from "./components/CustomCursor";
 
 function App() {
     return (
         <BrowserRouter>
 
+            <CustomCursor />
             <Navbar />
 
             <Routes>
