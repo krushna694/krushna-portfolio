@@ -39,14 +39,6 @@ function ProjectCard({ project, index }) {
 
                 <motion.div
                     className="project-image-wrapper"
-
-                    whileHover={{
-                        scale: 1.02,
-                    }}
-
-                    transition={{
-                        duration: 0.3,
-                    }}
                 >
 
                     <img
