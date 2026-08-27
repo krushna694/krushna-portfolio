@@ -181,11 +181,15 @@ section {
 
   cursor: pointer;
 
-  transition: color 0.25s ease;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .navbar-link:hover {
   color: #cbd5e1;
+
+  transform: translateY(-2px);
 }
 
 .navbar-link.active {
@@ -194,6 +198,9 @@ section {
 
 /* =========================
    ACTIVE INDICATOR
+========================= */
+/* =========================
+   NAVBAR ACTIVE LINE
 ========================= */
 
 .navbar-active-line {
@@ -209,6 +216,10 @@ section {
   border-radius: 10px;
 
   background-color: var(--accent);
+
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.45);
+
+  transition: box-shadow 0.25s ease;
 }
 
 /* =========================
