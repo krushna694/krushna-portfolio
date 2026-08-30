@@ -44,11 +44,12 @@ section {
   position: fixed;
 
   top: 0;
+
   left: 0;
 
   width: 100%;
 
-  z-index: 1000;
+  z-index: 10000;
 
   padding: 18px 0;
 
@@ -60,7 +61,6 @@ section {
     backdrop-filter 0.3s ease,
     border-color 0.3s ease;
 }
-
 /* =========================
    SCROLLED NAVBAR
 ========================= */
@@ -104,16 +104,16 @@ section {
   height: 38px;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
   gap: 1px;
-
   flex-shrink: 0;
 
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 10001;
 
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 9px;
 
   background-color: rgba(255, 255, 255, 0.025);
@@ -121,9 +121,7 @@ section {
   color: var(--text-primary);
 
   font-family: inherit;
-
   font-size: 0.7rem;
-
   font-weight: 700;
 
   cursor: pointer;
@@ -390,7 +388,7 @@ section {
     right: 0;
     bottom: 0;
 
-    z-index: 10000;
+    z-index: 9999;
 
     display: block;
 
