@@ -4323,3 +4323,161 @@ a:focus:not(:focus-visible) {
       0 0 16px rgba(56, 189, 248, 0.35);
   }
 }
+/* =========================
+   PREMIUM LOADING SCREEN
+========================= */
+
+.loading-screen {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 999999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background-color: #0b0f14;
+}
+
+.loading-content {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+.loading-logo {
+  width: 82px;
+  height: 82px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 16px;
+
+  color: #f8fafc;
+
+  font-size: 2rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+
+  background-color: rgba(255, 255, 255, 0.02);
+
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.05);
+}
+
+.loading-line {
+  height: 2px;
+
+  margin-top: 20px;
+
+  background-color: var(--accent);
+
+  border-radius: 10px;
+
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.45);
+}
+
+.loading-name {
+  margin-top: 20px;
+  margin-bottom: 0;
+
+  color: #cbd5e1;
+
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+
+  white-space: nowrap;
+
+  text-align: center;
+}
+
+.loading-screen {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 999999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background-color: #0b0f14;
+
+  overflow: hidden;
+}
+
+/* Subtle ambient glow */
+
+.loading-screen::before {
+  content: "";
+
+  position: absolute;
+
+  width: 320px;
+  height: 320px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(56, 189, 248, 0.06),
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+/* Prevent scrolling while loading */
+
+body:has(.loading-screen) {
+  overflow: hidden;
+}
+/* =========================
+   LOADING SCREEN MOBILE
+========================= */
+
+@media (max-width: 576px) {
+  .loading-logo {
+    width: 70px;
+    height: 70px;
+
+    font-size: 1.7rem;
+
+    border-radius: 14px;
+  }
+
+  .loading-name {
+    font-size: 0.85rem;
+
+    letter-spacing: 0.08em;
+
+    max-width: calc(100vw - 40px);
+
+    white-space: normal;
+
+    text-align: center;
+  }
+
+  .loading-line {
+    margin-top: 18px;
+  }
+}

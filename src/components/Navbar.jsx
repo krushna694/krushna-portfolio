@@ -1,11 +1,26 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBars, FaTimes, FaArrowUp } from "react-icons/fa";
+
+import {
+    useNavigate,
+    useLocation,
+} from "react-router-dom";
+
+import {
+    FaBars,
+    FaTimes,
+} from "react-icons/fa";
+
 
 function Navbar() {
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
     const [mobileOpen, setMobileOpen] = useState(false);
+
 
     const navItems = [
         { id: "home", label: "Home" },
@@ -17,60 +32,218 @@ function Navbar() {
         { id: "contact", label: "Contact" },
     ];
 
+
+    /* =========================
+       SCROLL + ACTIVE SECTION
+    ========================= */
+
     useEffect(() => {
+
         const handleScroll = () => {
+
             setScrolled(window.scrollY > 30);
+
+
+            /*
+             * Projects is a separate page.
+             * Keep Projects active while on /projects.
+             */
+
+            if (location.pathname === "/projects") {
+
+                setActiveSection("projects");
+
+                return;
+            }
+
+
+            /*
+             * Home page section detection
+             */
 
             const scrollPosition = window.scrollY + 180;
 
             let currentSection = "home";
 
+
             navItems.forEach((item) => {
+
+                /*
+                 * Projects is handled as a route,
+                 * not as a section on the home page.
+                 */
+
+                if (item.id === "projects") {
+                    return;
+                }
+
+
                 const section = document.getElementById(item.id);
 
-                if (section && section.offsetTop <= scrollPosition) {
+
+                if (
+                    section &&
+                    section.offsetTop <= scrollPosition
+                ) {
+
                     currentSection = item.id;
+
                 }
+
             });
 
+
             setActiveSection(currentSection);
+
         };
+
 
         handleScroll();
 
-        window.addEventListener("scroll", handleScroll);
+
+        window.addEventListener(
+            "scroll",
+            handleScroll
+        );
+
 
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+
+            window.removeEventListener(
+                "scroll",
+                handleScroll
+            );
+
         };
-    }, []);
+
+    }, [location.pathname]);
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
 
     const handleNavigation = (id) => {
-        const section = document.getElementById(id);
 
-        if (section) {
-            setMobileOpen(false);
+        /*
+         * Close mobile menu
+         */
+
+        setMobileOpen(false);
+
+
+        /*
+         * PROJECTS PAGE
+         */
+
+        if (id === "projects") {
+
+            if (location.pathname === "/projects") {
+
+                /*
+                 * Already on Projects page.
+                 * Just scroll to top.
+                 */
+
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                });
+
+            } else {
+
+                /*
+                 * Navigate to Projects page.
+                 */
+
+                navigate("/projects");
+
+            }
+
+            return;
+        }
+
+
+        /*
+         * HOME PAGE SECTIONS
+         */
+
+        if (location.pathname !== "/") {
+
+            /*
+             * Navigate back to Home first.
+             */
+
+            navigate("/");
+
+
+            /*
+             * Wait for Home to render,
+             * then scroll to requested section.
+             */
 
             setTimeout(() => {
-                section.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                });
+
+                const section =
+                    document.getElementById(id);
+
+
+                if (section) {
+
+                    section.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    });
+
+                }
+
             }, 100);
+
+
+            return;
         }
+
+
+        /*
+         * Already on Home.
+         * Scroll directly to section.
+         */
+
+        const section =
+            document.getElementById(id);
+
+
+        if (section) {
+
+            section.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+
+        }
+
     };
 
+
     return (
+
         <motion.header
-            className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}
+            className={`navbar ${scrolled
+                    ? "navbar-scrolled"
+                    : ""
+                }`}
+
             initial={{
                 y: -80,
                 opacity: 0,
             }}
+
             animate={{
                 y: 0,
                 opacity: 1,
             }}
+
             transition={{
                 duration: 0.6,
                 ease: "easeOut",
@@ -79,17 +252,24 @@ function Navbar() {
 
             <div className="navbar-container">
 
+
                 {/* =========================
                     LOGO
                 ========================= */}
 
                 <button
                     className="navbar-logo"
-                    onClick={() => handleNavigation("home")}
+
+                    onClick={() =>
+                        handleNavigation("home")
+                    }
+
                     aria-label="Go to home"
                 >
+
                     <span>K</span>
                     <span>W</span>
+
                 </button>
 
 
@@ -103,30 +283,42 @@ function Navbar() {
 
                         <button
                             key={item.id}
+
                             className={`navbar-link ${activeSection === item.id
-                                ? "active"
-                                : ""
+                                    ? "active"
+                                    : ""
                                 }`}
-                            onClick={() => handleNavigation(item.id)}
+
+                            onClick={() =>
+                                handleNavigation(item.id)
+                            }
                         >
+
                             {item.label}
 
+
                             {activeSection === item.id && (
+
                                 <motion.span
                                     className="navbar-active-line"
+
                                     layoutId="navbar-active-line"
+
                                     transition={{
                                         type: "spring",
                                         stiffness: 400,
                                         damping: 30,
                                     }}
                                 />
+
                             )}
+
                         </button>
 
                     ))}
 
                 </nav>
+
 
                 {/* =========================
                     MOBILE MENU BUTTON
@@ -134,18 +326,24 @@ function Navbar() {
 
                 <button
                     className="navbar-menu-button"
-                    onClick={() => setMobileOpen(!mobileOpen)}
+
+                    onClick={() =>
+                        setMobileOpen(!mobileOpen)
+                    }
+
                     aria-label={
                         mobileOpen
                             ? "Close navigation menu"
                             : "Open navigation menu"
                     }
                 >
+
                     {mobileOpen ? (
                         <FaTimes />
                     ) : (
                         <FaBars />
                     )}
+
                 </button>
 
             </div>
@@ -184,44 +382,56 @@ function Navbar() {
 
                         <div className="mobile-menu-inner">
 
-                            {navItems.map((item, index) => (
+                            {navItems.map(
+                                (item, index) => (
 
-                                <motion.button
-                                    key={item.id}
+                                    <motion.button
+                                        key={item.id}
 
-                                    className={`mobile-menu-link ${activeSection === item.id
-                                        ? "active"
-                                        : ""
-                                        }`}
+                                        className={`mobile-menu-link ${activeSection === item.id
+                                                ? "active"
+                                                : ""
+                                            }`}
 
-                                    onClick={() =>
-                                        handleNavigation(item.id)
-                                    }
+                                        onClick={() =>
+                                            handleNavigation(
+                                                item.id
+                                            )
+                                        }
 
-                                    initial={{
-                                        opacity: 0,
-                                        x: -15,
-                                    }}
+                                        initial={{
+                                            opacity: 0,
+                                            x: -15,
+                                        }}
 
-                                    animate={{
-                                        opacity: 1,
-                                        x: 0,
-                                    }}
+                                        animate={{
+                                            opacity: 1,
+                                            x: 0,
+                                        }}
 
-                                    transition={{
-                                        delay: index * 0.04,
-                                    }}
-                                >
-                                    <span>
-                                        {item.label}
-                                    </span>
+                                        transition={{
+                                            delay:
+                                                index * 0.04,
+                                        }}
+                                    >
 
-                                    {activeSection === item.id && (
-                                        <span className="mobile-active-dot"></span>
-                                    )}
-                                </motion.button>
+                                        <span>
+                                            {item.label}
+                                        </span>
 
-                            ))}
+
+                                        {activeSection === item.id && (
+
+                                            <span
+                                                className="mobile-active-dot"
+                                            />
+
+                                        )}
+
+                                    </motion.button>
+
+                                )
+                            )}
 
                         </div>
 
@@ -234,5 +444,6 @@ function Navbar() {
         </motion.header>
     );
 }
+
 
 export default Navbar;

@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+
 import {
     BrowserRouter,
     Routes,
@@ -5,17 +8,49 @@ import {
 } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-
+import CustomCursor from "./components/CustomCursor";
+import LoadingScreen from "./components/LoadingScreen";
+import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
 import ProjectsPage from "./pages/ProjectsPage";
-import CustomCursor from "./components/CustomCursor";
+
 
 function App() {
+
+    const [loading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 1200);
+
+
+        return () => {
+            clearTimeout(timer);
+        };
+
+    }, []);
+
+
     return (
+
         <BrowserRouter>
+            <ScrollToTop />
+            <AnimatePresence mode="wait">
+
+                {loading && (
+                    <LoadingScreen />
+                )}
+
+            </AnimatePresence>
+
 
             <CustomCursor />
+
             <Navbar />
+
 
             <Routes>
 
@@ -32,7 +67,9 @@ function App() {
             </Routes>
 
         </BrowserRouter>
+
     );
 }
+
 
 export default App;
